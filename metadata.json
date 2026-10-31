@@ -1,0 +1,6 @@
+{
+  "name": "Oregon Legal Manifold (Elite Edition)",
+  "description": "The ultimate legal intelligence platform for Oregon pro se litigants. Specializing in Family Law, Civil Rights, Estate, and Property Law. Features bulk caseload processing, PII detection, and statutory violation scanning with ORS/UTCR/SLR precision.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

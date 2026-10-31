@@ -1,0 +1,358 @@
+{
+  "metadata": {
+    "name": "Oregon Legal Manifold",
+    "version": "2026.04",
+    "jurisdiction": "Oregon (Baker County Focus)",
+    "sources": [
+      "ORS 2025",
+      "ORCP 2025",
+      "UTCR eff. Aug 1 2025",
+      "Baker County SLR eff. Feb 1 2025",
+      "Oregon Juvenile Dependency Benchbook (Guardianships)"
+    ]
+  },
+  "rules": [
+    {
+      "rule_id": "ORS.12.050",
+      "source_layer": "ORS",
+      "citation": "ORS 12.050",
+      "title": "Recovery of real property",
+      "category": "statute_of_limitations",
+      "rule_type": "deadline",
+      "deadline": {
+        "period": "10 years",
+        "period_days": 3650,
+        "trigger_event": "date of dispossession",
+        "absolute_cap": null
+      },
+      "notes": "Applies to actions for recovery of possession of real property; adverse possession threshold"
+    },
+    {
+      "rule_id": "ORS.12.080.1",
+      "source_layer": "ORS",
+      "citation": "ORS 12.080(1)",
+      "title": "Contract or liability, express or implied",
+      "category": "statute_of_limitations",
+      "rule_type": "deadline",
+      "deadline": {
+        "period": "6 years",
+        "period_days": 2190,
+        "trigger_event": "date of breach or accrual",
+        "absolute_cap": null
+      },
+      "notes": "Covers most general contract claims; does not apply to UCC Article 2 sales"
+    },
+    {
+      "rule_id": "ORS.12.110.1",
+      "source_layer": "ORS",
+      "citation": "ORS 12.110(1)",
+      "title": "Personal injury / Tort",
+      "category": "statute_of_limitations",
+      "rule_type": "deadline",
+      "deadline": {
+        "period": "2 years",
+        "period_days": 730,
+        "trigger_event": "date of injury; fraud/deceit: from discovery",
+        "absolute_cap": null
+      },
+      "notes": "Assault, battery, false imprisonment, personal injury not arising on contract"
+    },
+    {
+      "rule_id": "ORS.12.110.4",
+      "source_layer": "ORS",
+      "citation": "ORS 12.110(4)",
+      "title": "Medical malpractice",
+      "category": "statute_of_limitations",
+      "rule_type": "deadline",
+      "deadline": {
+        "period": "2 years from discovery; 5-year absolute cap",
+        "period_days": 730,
+        "trigger_event": "discovery of injury or reason to discover",
+        "absolute_cap": "5 years from treatment"
+      },
+      "notes": "Fraud exception: if provider committed fraud, 2 years from discovery of fraud (no 5-year cap)"
+    },
+    {
+      "rule_id": "ORS.12.120",
+      "source_layer": "ORS",
+      "citation": "ORS 12.120",
+      "title": "Libel / Slander",
+      "category": "statute_of_limitations",
+      "rule_type": "deadline",
+      "deadline": {
+        "period": "1 year",
+        "period_days": 365,
+        "trigger_event": "date of publication or utterance",
+        "absolute_cap": null
+      }
+    },
+    {
+      "rule_id": "ORS.12.125",
+      "source_layer": "ORS",
+      "citation": "ORS 12.125",
+      "title": "Rental agreements / ORS Ch. 90",
+      "category": "statute_of_limitations",
+      "rule_type": "deadline",
+      "deadline": {
+        "period": "1 year",
+        "period_days": 365,
+        "trigger_event": "date claim arises under agreement or Chapter 90",
+        "absolute_cap": null
+      }
+    },
+    {
+      "rule_id": "ORS.12.160",
+      "source_layer": "ORS",
+      "citation": "ORS 12.160",
+      "title": "Minority / Mental Disability Tolling",
+      "category": "tolling",
+      "rule_type": "trigger",
+      "deadline": {
+        "period": "Tolled during disability",
+        "period_days": -1,
+        "trigger_event": "Claimant under 18 or disabling mental condition at accrual",
+        "absolute_cap": "5 years beyond SOL or 1 year after disability removal"
+      }
+    },
+    {
+      "rule_id": "ORCP.7",
+      "source_layer": "ORCP",
+      "citation": "ORCP 7",
+      "title": "Summons / Response Time",
+      "category": "service",
+      "rule_type": "deadline",
+      "deadline": {
+        "period": "30 days",
+        "period_days": 30,
+        "trigger_event": "service of summons",
+        "absolute_cap": null
+      },
+      "notes": "Defendant has 30 days to appear and defend after service"
+    },
+    {
+      "rule_id": "UTCR.5.010",
+      "source_layer": "UTCR",
+      "citation": "UTCR 5.010",
+      "title": "Mandatory Conferral",
+      "category": "motion",
+      "rule_type": "requirement",
+      "notes": "Good-faith conferral required before filing most motions (ORCP 21, 23, 36-46, 55)"
+    },
+    {
+      "rule_id": "SLR.BAKER.2.011",
+      "source_layer": "SLR",
+      "citation": "SLR Baker 2.011",
+      "title": "Addresses and Telephone Numbers",
+      "category": "format",
+      "rule_type": "requirement",
+      "notes": "All pleadings must include current address and telephone number of filing party/attorney"
+    },
+    {
+      "rule_id": "SLR.BAKER.1.171",
+      "source_layer": "SLR",
+      "citation": "SLR Baker 1.171",
+      "title": "Court Website",
+      "category": "general",
+      "rule_type": "requirement",
+      "notes": "Court website is the primary source for current SLR text, local forms, and scheduling information."
+    },
+    {
+      "rule_id": "SLR.BAKER.3.051",
+      "source_layer": "SLR",
+      "citation": "SLR Baker 3.051",
+      "title": "Remote Appearances and Exhibits",
+      "category": "trial",
+      "rule_type": "requirement",
+      "notes": "Remote appearances require advance permission. All exhibits must be pre-submitted before the hearing date."
+    },
+    {
+      "rule_id": "SLR.BAKER.3.181",
+      "source_layer": "SLR",
+      "citation": "SLR Baker 3.181",
+      "title": "Public Access Coverage",
+      "category": "general",
+      "rule_type": "requirement",
+      "notes": "Media coverage and recording are subject to court approval. Requests must be submitted in advance."
+    },
+    {
+      "rule_id": "SLR.BAKER.6.012",
+      "source_layer": "SLR",
+      "citation": "SLR Baker 6.012",
+      "title": "Settlement Conference",
+      "category": "trial",
+      "rule_type": "requirement",
+      "notes": "Mandatory settlement conferences may be required. Persons with full settlement authority must attend in person or by phone."
+    },
+    {
+      "rule_id": "SLR.BAKER.7.025",
+      "source_layer": "SLR",
+      "citation": "SLR Baker 7.025",
+      "title": "Court Scheduling",
+      "category": "scheduling",
+      "rule_type": "requirement",
+      "notes": "All matters must be set through the court administrator"
+    },
+    {
+      "rule_id": "SLR.BAKER.6.082",
+      "source_layer": "SLR",
+      "citation": "SLR Baker 6.082",
+      "title": "Stipulate to Exhibits",
+      "category": "trial",
+      "rule_type": "recommendation",
+      "notes": "Parties are encouraged to stipulate to exhibit authenticity and admissibility before trial to streamline proceedings."
+    },
+    {
+      "rule_id": "SLR.BAKER.6.191",
+      "source_layer": "SLR",
+      "citation": "SLR Baker 6.191",
+      "title": "AV Equipment Approval",
+      "category": "trial",
+      "rule_type": "requirement",
+      "notes": "Advance court approval is required for any audio-visual equipment used in court. Submit requests before the hearing or trial date."
+    },
+    {
+      "rule_id": "SLR.BAKER.8.011",
+      "source_layer": "SLR",
+      "citation": "SLR Baker 8.011",
+      "title": "Parent Education Class",
+      "category": "domestic_relations",
+      "rule_type": "requirement",
+      "notes": "Required in all cases involving custody or parenting time. Must be completed within the time specified by the court."
+    },
+    {
+      "rule_id": "SLR.BAKER.8.075",
+      "source_layer": "SLR",
+      "citation": "SLR Baker 8.075",
+      "title": "Parenting Plan Specificity",
+      "category": "domestic_relations",
+      "rule_type": "requirement",
+      "notes": "Parenting plans must address residential schedule, holidays, decision-making, transportation, and communication. Vague or incomplete plans may be rejected."
+    },
+    {
+      "rule_id": "SLR.BAKER.9.085",
+      "source_layer": "SLR",
+      "citation": "SLR Baker 9.085",
+      "title": "Guardianship Requirements",
+      "category": "probate",
+      "rule_type": "requirement",
+      "notes": "Specific requirements for visitor reports, background checks, bonding, annual reporting, and guardianship plan review."
+    },
+    {
+      "rule_id": "SLR.BAKER.11.115",
+      "source_layer": "SLR",
+      "citation": "SLR Baker 11.115",
+      "title": "Juvenile Exhibits",
+      "category": "juvenile",
+      "rule_type": "requirement",
+      "notes": "Specific procedures for exhibit submission in juvenile court proceedings."
+    },
+    {
+      "rule_id": "SLR.BAKER.12.015",
+      "source_layer": "SLR",
+      "citation": "SLR Baker 12.015",
+      "title": "Mandatory Mediation — Custody/Parenting",
+      "category": "mediation",
+      "rule_type": "requirement",
+      "notes": "Mediation is required before trial in all custody and parenting time disputes."
+    },
+    {
+      "rule_id": "SLR.BAKER.12.018",
+      "source_layer": "SLR",
+      "citation": "SLR Baker 12.018",
+      "title": "Mediation Accommodations",
+      "category": "mediation",
+      "rule_type": "requirement",
+      "notes": "Power imbalance accommodations available for mediation."
+    },
+    {
+      "rule_id": "SLR.BAKER.12.021",
+      "source_layer": "SLR",
+      "citation": "SLR Baker 12.021",
+      "title": "Mediation Confidentiality",
+      "category": "mediation",
+      "rule_type": "requirement",
+      "notes": "Confidentiality protected in mediation proceedings."
+    },
+    {
+      "rule_id": "SLR.BAKER.12.025",
+      "source_layer": "SLR",
+      "citation": "SLR Baker 12.025",
+      "title": "Mediation Exemptions",
+      "category": "mediation",
+      "rule_type": "requirement",
+      "notes": "Exemptions available for DV or inability to mediate."
+    },
+    {
+      "rule_id": "SLR.BAKER.12.055",
+      "source_layer": "SLR",
+      "citation": "SLR Baker 12.055",
+      "title": "Mediator Appointment",
+      "category": "mediation",
+      "rule_type": "requirement",
+      "notes": "If parties cannot agree on a mediator, the court appoints one from the qualified mediator list."
+    },
+    {
+      "rule_id": "ORS.419B.336",
+      "source_layer": "ORS",
+      "citation": "ORS 419B.336",
+      "title": "Durable Guardianship",
+      "category": "juvenile_dependency",
+      "rule_type": "requirement",
+      "notes": "Provides for juvenile guardianship when child cannot safely return home within reasonable time."
+    },
+    {
+      "rule_id": "ORS.419B.365",
+      "source_layer": "ORS",
+      "citation": "ORS 419B.365",
+      "title": "Permanent Guardianship",
+      "category": "juvenile_dependency",
+      "rule_type": "requirement",
+      "notes": "Grounds same as termination of parental rights. Parent may not petition to vacate."
+    },
+    {
+      "rule_id": "ORS.419B.371",
+      "source_layer": "ORS",
+      "citation": "ORS 419B.371",
+      "title": "Community Guardianship",
+      "category": "juvenile_dependency",
+      "rule_type": "requirement",
+      "notes": "Durable guardianship to a licensed child-care agency for children 16 or older."
+    },
+    {
+      "rule_id": "ORS.419B.366",
+      "source_layer": "ORS",
+      "citation": "ORS 419B.366",
+      "title": "Establishing Durable Guardianship",
+      "category": "juvenile_dependency",
+      "rule_type": "procedure",
+      "notes": "Requires findings that child cannot safely return to parent, adoption not appropriate, and guardian suitable."
+    },
+    {
+      "rule_id": "ORS.419B.367",
+      "source_layer": "ORS",
+      "citation": "ORS 419B.367",
+      "title": "Guardianship Order and Reports",
+      "category": "juvenile_dependency",
+      "rule_type": "requirement",
+      "notes": "Requires annual guardian's report due within 30 days of anniversary of appointment."
+    },
+    {
+      "rule_id": "ORS.419B.368",
+      "source_layer": "ORS",
+      "citation": "ORS 419B.368",
+      "title": "Review, Modification, and Vacation",
+      "category": "juvenile_dependency",
+      "rule_type": "procedure",
+      "notes": "Court may modify or vacate order based on child's best interests and amelioration of conditions."
+    },
+    {
+      "rule_id": "ORS.419B.328",
+      "source_layer": "ORS",
+      "citation": "ORS 419B.328",
+      "title": "Duration of Wardship",
+      "category": "juvenile_dependency",
+      "rule_type": "deadline",
+      "notes": "Jurisdiction continues until dismissal, transfer, termination, adoption, or ward becomes 21."
+    }
+  ]
+}

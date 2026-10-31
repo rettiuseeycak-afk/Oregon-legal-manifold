@@ -1,0 +1,97 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ===============================================================
+    // Helper Functions
+    // ===============================================================
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+    
+    function isDocOwner() {
+      return isAuthenticated() && request.auth.uid == resource.data.uid;
+    }
+    
+    function uidUnchanged() {
+      return !('uid' in request.resource.data) ||
+        request.resource.data.uid == request.auth.uid;
+    }
+    
+    function uidNotModified() {
+      return !('uid' in request.resource.data) ||
+        request.resource.data.uid == resource.data.uid;
+    }
+
+    // ===============================================================
+    // Case Validation
+    // ===============================================================
+    function isValidCase(data) {
+      return data.id is string &&
+             data.uid is string &&
+             data.name is string &&
+             data.name.size() > 0 &&
+             data.name.size() < 256;
+    }
+
+    // ===============================================================
+    // Precedent Validation
+    // ===============================================================
+    function isValidPrecedent(data) {
+      return data.id is string &&
+             data.id.size() <= 128 &&
+             data.title is string &&
+             data.title.size() > 0 &&
+             data.title.size() <= 256 &&
+             data.citation is string &&
+             data.citation.size() > 0 &&
+             data.citation.size() <= 128 &&
+             data.jurisdiction is string &&
+             data.jurisdiction.size() > 0 &&
+             data.jurisdiction.size() <= 128 &&
+             data.caseType is string &&
+             data.caseType.size() > 0 &&
+             data.caseType.size() <= 128 &&
+             data.summary is string &&
+             data.summary.size() > 0 &&
+             data.summary.size() <= 10000;
+    }
+
+    // ===============================================================
+    // User Validation
+    // ===============================================================
+    function isValidUser(data) {
+      return data.id is string &&
+             data.email is string &&
+             data.email.size() > 0 &&
+             data.email.size() <= 256 &&
+             data.plan is string &&
+             data.passwordHash is string &&
+             data.createdAt is number;
+    }
+
+    match /cases/{caseId} {
+      allow read: if isAuthenticated() && isDocOwner();
+      allow create: if isAuthenticated() && uidUnchanged() && isValidCase(request.resource.data);
+      allow update: if isAuthenticated() && isDocOwner() && uidNotModified() && isValidCase(request.resource.data);
+      allow delete: if isAuthenticated() && isDocOwner();
+    }
+
+    match /precedents/{precedentId} {
+      allow read: if isAuthenticated();
+      allow create: if isAuthenticated() && isValidPrecedent(request.resource.data);
+      allow update: if isAuthenticated() && isValidPrecedent(request.resource.data) && (resource.data.addedBy == request.auth.uid || resource.data.addedBy == null);
+      allow delete: if isAuthenticated() && (resource.data.addedBy == request.auth.uid || resource.data.addedBy == null);
+    }
+
+    match /users/{userId} {
+      allow read: if isAuthenticated();
+      allow create: if isValidUser(request.resource.data);
+      allow update: if isAuthenticated() && isValidUser(request.resource.data);
+      allow delete: if isAuthenticated() && (request.auth.uid == userId || resource.data.id == request.auth.uid);
+    }
+  }
+}

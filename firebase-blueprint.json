@@ -1,0 +1,82 @@
+{
+  "entities": {
+    "Case": {
+      "title": "Case",
+      "description": "A legal case with evidence, claims, and generated documents.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "uid": { "type": "string" },
+        "name": { "type": "string" },
+        "jurisdiction": { "type": "string" },
+        "courtRules": { "type": "string" },
+        "evidence": { "type": "array" },
+        "claims": { "type": "array" },
+        "generatedDocs": { "type": "object" },
+        "rectificationScan": { "type": "object" },
+        "judicialReview": { "type": "object" },
+        "citationAudit": { "type": "object" },
+        "checklistItems": { "type": "object" },
+        "adversarialSimulation": { "type": "object" },
+        "evidenceAudit": { "type": "object" },
+        "corporateDisclosure": { "type": "object" },
+        "interrogatories": { "type": "object" },
+        "systemicAudit": { "type": "object" },
+        "isFinalized": { "type": "boolean" },
+        "serviceOfProcess": { "type": "object" },
+        "oregonLegalHierarchy": { "type": "object" },
+        "smallClaimsData": { "type": "object" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "uid", "name"]
+    },
+    "Precedent": {
+      "title": "Precedent",
+      "description": "A binding search/reference legal precedent.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "citation": { "type": "string" },
+        "jurisdiction": { "type": "string" },
+        "caseType": { "type": "string" },
+        "decisionDate": { "type": "string" },
+        "summary": { "type": "string" },
+        "holdings": { "type": "array" },
+        "keywords": { "type": "array" },
+        "addedBy": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "title", "citation", "jurisdiction", "caseType", "summary"]
+    },
+    "User": {
+      "title": "User",
+      "description": "Registered user account with subscription plan, credentials, and metadata.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "passwordHash": { "type": "string" },
+        "plan": { "type": "string" },
+        "usage": { "type": "object" },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["id", "email", "passwordHash", "plan", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/cases/{caseId}": {
+      "schema": "Case",
+      "description": "Collection of legal cases owned by users."
+    },
+    "/precedents/{precedentId}": {
+      "schema": "Precedent",
+      "description": "Global or user-added database of legal precedents and case law."
+    },
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile and subscription metadata collection."
+    }
+  }
+}
