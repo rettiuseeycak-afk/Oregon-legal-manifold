@@ -50,6 +50,19 @@ async function startServer() {
   app.use("/api/billing", (await import('./src/routes/billing')).default);
   app.use("/api/auth", (await import('./src/routes/auth')).default);
 
+  // Billing checkout redirect callbacks
+  app.get('/billing/success', (req, res) => {
+    const plan = req.query.plan || 'elite';
+    const user = req.query.user || '';
+    const sessionId = req.query.session_id || '';
+    const mode = req.query.mode || '';
+    res.redirect(`/?billing_success=true&plan=${encodeURIComponent(String(plan))}&user=${encodeURIComponent(String(user))}&session_id=${encodeURIComponent(String(sessionId))}&mode=${encodeURIComponent(String(mode))}`);
+  });
+
+  app.get('/billing/cancel', (req, res) => {
+    res.redirect(`/?billing_cancelled=true`);
+  });
+
   // API Routes
   app.get("/api/health", (req, res) => {
     res.json({ status: "ok", system: "Legal Manifold v2.5", timestamp: new Date().toISOString() });

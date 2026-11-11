@@ -156,9 +156,9 @@ export function BillingDashboard({ user, openBillingModal: externalOpenModal }: 
                     </div>
                     <button
                       onClick={() => {
-                        window.location.href = `/api/billing/checkout?planId=${p.id}`;
+                        window.location.href = `/api/billing/checkout?planId=${p.id}&userId=${encodeURIComponent(user?.id || 'current-user')}`;
                       }}
-                      className="w-full py-2 bg-orange-600 hover:bg-orange-500 text-white font-mono text-xs uppercase font-bold rounded"
+                      className="w-full py-2 bg-orange-600 hover:bg-orange-500 text-white font-mono text-xs uppercase font-bold rounded cursor-pointer"
                     >
                       Select
                     </button>

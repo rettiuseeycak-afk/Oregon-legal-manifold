@@ -149,10 +149,14 @@ export default function App() {
   const [userPlan, setUserPlan] = useState<SubscriptionPlanId>(() => {
     return (localStorage.getItem('legal_manifold_user_plan') as SubscriptionPlanId) || 'free';
   });
+  const [billingNotice, setBillingNotice] = useState<{
+    type: 'success' | 'cancelled';
+    message: string;
+  } | null>(null);
   const [upgradeModalState, setUpgradeModalState] = useState<{
     isOpen: boolean;
     message: string;
-  }>({
+  } | null>({
     isOpen: false,
     message: 'Elite plan required for litigation strategy engine.',
   });
@@ -163,6 +167,34 @@ export default function App() {
       message,
     });
   };
+
+  // Detect Stripe Checkout return callbacks
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('billing_success') === 'true') {
+        const plan = (params.get('plan') as SubscriptionPlanId) || 'elite';
+        if (['free', 'pro', 'elite', 'enterprise'].includes(plan)) {
+          setUserPlan(plan);
+          localStorage.setItem('legal_manifold_user_plan', plan);
+          setBillingNotice({
+            type: 'success',
+            message: `Subscription successfully activated! Your account is upgraded to the ${plan.toUpperCase()} plan.`
+          });
+        }
+        window.history.replaceState({}, document.title, window.location.pathname);
+      } else if (params.get('billing_cancelled') === 'true') {
+        setBillingNotice({
+          type: 'cancelled',
+          message: 'Checkout was cancelled. Your current plan was not changed.'
+        });
+        window.history.replaceState({}, document.title, window.location.pathname);
+      }
+    } catch (e) {
+      console.warn("Failed to parse billing return URL parameters", e);
+    }
+  }, []);
 
   const userProfile = {
     id: user?.uid || 'sandbox-user',
@@ -186,6 +218,7 @@ export default function App() {
     });
     return () => unsubscribe();
   }, []);
+
 
   // Load cases from Firestore
   useEffect(() => {
@@ -755,6 +788,25 @@ export default function App() {
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col min-w-0">
+        {billingNotice && (
+          <div className={cn(
+            "px-6 py-2.5 text-xs font-mono flex items-center justify-between border-b transition-all",
+            billingNotice.type === 'success'
+              ? "bg-emerald-950/80 border-emerald-500/40 text-emerald-200"
+              : "bg-zinc-900 border-zinc-700 text-zinc-300"
+          )}>
+            <div className="flex items-center gap-2">
+              <Sparkles className="w-4 h-4 text-emerald-400" />
+              <span>{billingNotice.message}</span>
+            </div>
+            <button
+              onClick={() => setBillingNotice(null)}
+              className="text-xs uppercase font-bold text-zinc-400 hover:text-white px-2 py-0.5 rounded hover:bg-black/40 cursor-pointer"
+            >
+              Dismiss
+            </button>
+          </div>
+        )}
         {activeCase ? (
           <>
             <header className="h-16 border-b border-zinc-900 flex items-center justify-between px-8 bg-zinc-950/50 backdrop-blur-xl z-10">
@@ -1018,18 +1070,6 @@ export default function App() {
               onClose={() => setIsAppBackupModalOpen(false)} 
               activeCase={activeCase} 
             />
-            {/* Upgrade Subscription Modal */}
-            <UpgradeModal
-              isOpen={upgradeModalState.isOpen}
-              onClose={() => setUpgradeModalState(prev => ({ ...prev, isOpen: false }))}
-              message={upgradeModalState.message}
-              currentPlan={userPlan}
-              userId={user?.uid || 'sandbox-user'}
-              onPlanChanged={(newPlan) => {
-                setUserPlan(newPlan);
-                localStorage.setItem('legal_manifold_user_plan', newPlan);
-              }}
-            />
           </>
         ) : (
           <div className="flex-1 flex flex-col items-center justify-center text-zinc-700 space-y-6">
@@ -1048,6 +1088,18 @@ export default function App() {
             </button>
           </div>
         )}
+        {/* Upgrade Subscription Modal */}
+        <UpgradeModal
+          isOpen={upgradeModalState?.isOpen || false}
+          onClose={() => setUpgradeModalState(prev => prev ? ({ ...prev, isOpen: false }) : null)}
+          message={upgradeModalState?.message}
+          currentPlan={userPlan}
+          userId={user?.uid || 'sandbox-user'}
+          onPlanChanged={(newPlan) => {
+            setUserPlan(newPlan);
+            localStorage.setItem('legal_manifold_user_plan', newPlan);
+          }}
+        />
       </main>
     </div>
   );
